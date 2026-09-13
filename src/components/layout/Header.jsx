@@ -7,7 +7,10 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <span className={`wordmark ${styles.brand}`}>Digital Polaroid</span>
+      <div className={styles.brandGroup}>
+        <span className={`wordmark ${styles.brand}`}>Dear Snap</span>
+        <span className={styles.tagline}>little moments, kept forever.</span>
+      </div>
       <button
         type="button"
         className={styles.feedbackButton}

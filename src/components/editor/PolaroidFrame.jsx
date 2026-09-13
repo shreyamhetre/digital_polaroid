@@ -1,4 +1,4 @@
-import { getContrastText } from '../../utils/color.js'
+import { GRAIN_DATA_URI, GRAIN_TILE } from '../../utils/grainTexture.js'
 import styles from './PolaroidFrame.module.css'
 
 export default function PolaroidFrame({
@@ -7,12 +7,12 @@ export default function PolaroidFrame({
   grain = false,
   caption,
   captionFont,
-  frameColor = '#ffffff',
+  captionColor,
+  frameStyle,
   photoWindowRef,
-  children,
 }) {
   return (
-    <div className={styles.frame} style={{ background: frameColor }}>
+    <div className={styles.frame} style={frameStyle}>
       <div className={styles.photoWindow} ref={photoWindowRef}>
         <img
           src={photoUrl}
@@ -20,13 +20,18 @@ export default function PolaroidFrame({
           className={styles.photo}
           style={{ filter: filterCss }}
         />
-        {grain && <div className={styles.grain} aria-hidden="true" />}
-        {children}
+        {grain && (
+          <div
+            className={styles.grain}
+            aria-hidden="true"
+            style={{
+              backgroundImage: `url("${GRAIN_DATA_URI}")`,
+              backgroundSize: `${GRAIN_TILE}px ${GRAIN_TILE}px`,
+            }}
+          />
+        )}
       </div>
-      <p
-        className={styles.caption}
-        style={{ fontFamily: captionFont, color: getContrastText(frameColor) }}
-      >
+      <p className={styles.caption} style={{ fontFamily: captionFont, color: captionColor }}>
         {caption}
       </p>
     </div>
