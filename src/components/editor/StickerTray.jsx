@@ -1,6 +1,5 @@
+import { STICKERS } from '../../utils/stickers.js'
 import styles from './StickerTray.module.css'
-
-const STICKERS = ['❤️', '⭐', '✨', '🌸', '😊', '🎉', '🌈', '🔥']
 
 export default function StickerTray({ onPick }) {
   return (

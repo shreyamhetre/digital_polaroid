@@ -17,12 +17,6 @@
   line-height: 1;
 }
 
-.text {
-  font-size: 1.75rem;
-  color: var(--color-text);
-  white-space: nowrap;
-}
-
 .remove {
   position: absolute;
   top: -10px;

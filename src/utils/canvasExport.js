@@ -1,4 +1,5 @@
 import { FILTERS } from './filters.js'
+import { getContrastText } from './color.js'
 
 const CANVAS_W = 1000
 const PADDING = 60
@@ -43,7 +44,14 @@ function drawGrain(ctx, x, y, size) {
  * a PNG blob. Decoration coordinates are fractions (0-1) of the photo window,
  * matching how they're stored for the DOM preview.
  */
-export async function exportPolaroid({ photoUrl, filterId, decorations, caption }) {
+export async function exportPolaroid({
+  photoUrl,
+  filterId,
+  decorations,
+  caption,
+  captionFont = 'Caveat',
+  frameColor = '#ffffff',
+}) {
   const preset = FILTERS.find((filter) => filter.id === filterId) ?? FILTERS[0]
   const img = await loadImage(photoUrl)
   await document.fonts.ready
@@ -53,7 +61,7 @@ export async function exportPolaroid({ photoUrl, filterId, decorations, caption 
   canvas.height = CANVAS_H
   const ctx = canvas.getContext('2d')
 
-  ctx.fillStyle = '#ffffff'
+  ctx.fillStyle = frameColor
   ctx.fillRect(0, 0, CANVAS_W, CANVAS_H)
 
   const side = Math.min(img.width, img.height)
@@ -78,20 +86,14 @@ export async function exportPolaroid({ photoUrl, filterId, decorations, caption 
     ctx.scale(decoration.scale, decoration.scale)
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
-    if (decoration.type === 'sticker') {
-      ctx.font = '64px sans-serif'
-      ctx.fillText(decoration.content, 0, 0)
-    } else {
-      ctx.font = "40px 'Caveat', cursive"
-      ctx.fillStyle = '#2b2622'
-      ctx.fillText(decoration.content, 0, 0)
-    }
+    ctx.font = '64px sans-serif'
+    ctx.fillText(decoration.content, 0, 0)
     ctx.restore()
   })
 
   if (caption) {
-    ctx.font = "56px 'Caveat', cursive"
-    ctx.fillStyle = '#2b2622'
+    ctx.font = `56px '${captionFont}', cursive`
+    ctx.fillStyle = getContrastText(frameColor)
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
     ctx.fillText(caption, CANVAS_W / 2, PADDING + PHOTO_SIZE + CAPTION_HEIGHT / 2)

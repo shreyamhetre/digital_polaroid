@@ -33,9 +33,7 @@ export default function DecorationLayer({ decoration, containerRef, onMove, onRe
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
     >
-      <span className={decoration.type === 'text' ? `wordmark ${styles.text}` : styles.sticker}>
-        {decoration.content}
-      </span>
+      <span className={styles.sticker}>{decoration.content}</span>
       <button
         type="button"
         className={styles.remove}

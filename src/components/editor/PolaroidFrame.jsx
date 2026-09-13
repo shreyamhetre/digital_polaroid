@@ -1,3 +1,4 @@
+import { getContrastText } from '../../utils/color.js'
 import styles from './PolaroidFrame.module.css'
 
 export default function PolaroidFrame({
@@ -5,11 +6,13 @@ export default function PolaroidFrame({
   filterCss = 'none',
   grain = false,
   caption,
+  captionFont,
+  frameColor = '#ffffff',
   photoWindowRef,
   children,
 }) {
   return (
-    <div className={styles.frame}>
+    <div className={styles.frame} style={{ background: frameColor }}>
       <div className={styles.photoWindow} ref={photoWindowRef}>
         <img
           src={photoUrl}
@@ -20,7 +23,12 @@ export default function PolaroidFrame({
         {grain && <div className={styles.grain} aria-hidden="true" />}
         {children}
       </div>
-      <p className={`wordmark ${styles.caption}`}>{caption}</p>
+      <p
+        className={styles.caption}
+        style={{ fontFamily: captionFont, color: getContrastText(frameColor) }}
+      >
+        {caption}
+      </p>
     </div>
   )
 }
