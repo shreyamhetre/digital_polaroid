@@ -1,4 +1,5 @@
 .hero {
+  position: relative;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -6,87 +7,227 @@
   justify-content: center;
   text-align: center;
   padding: var(--space-6) var(--space-4);
-  gap: var(--space-3);
+  gap: var(--space-2);
+  overflow: hidden;
 }
 
-.camera {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: var(--space-3);
+.blobTopLeft,
+.blobBottomRight {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 45% 55% 60% 40% / 50% 45% 55% 50%;
+  background: var(--color-accent-soft);
+  opacity: 0.35;
+  z-index: 0;
 }
 
-.cameraBody {
+.blobTopLeft {
+  top: -120px;
+  left: -140px;
+}
+
+.blobBottomRight {
+  bottom: -140px;
+  right: -140px;
+}
+
+.doodleHeartLine {
+  position: absolute;
+  bottom: var(--space-5);
+  left: var(--space-5);
+  width: 110px;
+  height: auto;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.doodleDashes {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-5);
+  width: 50px;
+  height: auto;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.illustration {
   position: relative;
-  width: 220px;
-  height: 140px;
-  background: var(--color-surface);
-  border: 3px solid var(--color-text);
-  border-radius: var(--radius-lg);
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-polaroid);
+  margin-bottom: var(--space-2);
 }
 
-.lens {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: var(--color-text);
-  border: 6px solid var(--color-accent-soft);
-}
-
-.flash {
+.burstCameraLeft,
+.burstCameraRight {
   position: absolute;
-  top: 14px;
-  right: 22px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--color-accent);
+  width: 34px;
+  height: 34px;
+  top: 40%;
+  opacity: 0.7;
 }
 
-.cameraFoot {
-  width: 60px;
-  height: 10px;
-  background: var(--color-text);
-  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+.burstCameraLeft {
+  left: -48px;
+  transform: scaleX(-1);
+}
+
+.burstCameraRight {
+  right: -48px;
+}
+
+.burstHeading {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  left: -34px;
+  top: 4px;
+  opacity: 0.7;
+  transform: rotate(-18deg);
+}
+
+.cameraWrap {
+  display: flex;
+}
+
+.camera {
+  width: clamp(160px, 22vw, 220px);
+  height: auto;
+  filter: drop-shadow(0 6px 10px rgba(58, 33, 42, 0.14));
+}
+
+.sparkle {
+  position: absolute;
+  top: -6px;
+  left: -8px;
+  display: flex;
+}
+
+.sparkleIcon {
+  width: 28px;
+  height: 28px;
+  color: var(--color-accent);
+}
+
+.photoCard {
+  position: absolute;
+  right: -26px;
+  top: 38%;
+  margin-top: -31px;
+  width: 52px;
+  height: 62px;
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tape {
+  position: absolute;
+  top: -8px;
+  left: 8px;
+  width: 26px;
+  height: 12px;
+  background: var(--color-accent-soft);
+  transform: rotate(-6deg);
+  border-radius: 2px;
+}
+
+.cardHeart {
+  width: 20px;
+  height: 20px;
+  color: var(--color-accent);
 }
 
 .heading {
-  font-size: clamp(2rem, 4vw, 2.75rem);
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--color-text);
   margin: 0;
 }
 
-.subheading {
+.headingHeart {
+  display: inline-flex;
+  position: relative;
+  top: -0.32em;
+}
+
+.headingHeartIcon {
+  width: clamp(1.6rem, 3vw, 2.2rem);
+  height: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--color-accent);
+}
+
+.underline {
+  position: absolute;
+  left: 50%;
+  bottom: -0.6rem;
+  transform: translateX(-50%);
+  width: 65%;
+  height: 14px;
+}
+
+.tagline {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--color-text);
+  margin: var(--space-3) 0 0;
+}
+
+.description {
+  position: relative;
+  z-index: 1;
   color: var(--color-text-muted);
   max-width: 32rem;
   margin: 0;
 }
 
 .actions {
+  position: relative;
+  z-index: 1;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-3);
   margin-top: var(--space-3);
 }
 
 .primary,
 .secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-pill);
   font-size: 1rem;
   cursor: pointer;
   border: 1px solid transparent;
 }
 
+.buttonIcon {
+  width: 18px;
+  height: 18px;
+}
+
 .primary {
   background: var(--color-accent);
   color: var(--color-surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .secondary {
-  background: transparent;
+  background: var(--color-surface);
   border-color: var(--color-border);
   color: var(--color-text);
 }

@@ -25,20 +25,18 @@ function stripeSvg(color) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><defs><pattern id="s" width="14" height="14" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="7" height="14" fill="${color}"/><rect x="7" width="7" height="14" fill="#fdf3ea"/></pattern></defs><rect width="40" height="40" fill="url(#s)"/></svg>`
 }
 
-// Small, tightly-packed tiles so the icon shows in full even on the
-// thin top/side border strips, instead of being bisected by the crop.
 const STATIC_FRUITS = [
   {
     id: 'strawberry',
     label: 'Strawberry',
-    tile: 20,
-    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="20" height="20" fill="#fbe4e4"/><g transform="translate(10 11)"><path d="M0 8 C-6 4 -6 -2 0 -2 C6 -2 6 4 0 8 Z" fill="#e5484d"/><circle cx="-2" cy="2" r="0.7" fill="#fff"/><circle cx="2" cy="2" r="0.7" fill="#fff"/><circle cx="0" cy="5" r="0.7" fill="#fff"/><path d="M-3 -2 L0 -5 L3 -2 Z" fill="#4caf6d"/></g></svg>',
+    tile: 21,
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21"><rect width="21" height="21" fill="#fbe4e4"/><g transform="translate(10.5 10)"><path d="M0 4.5 C-3.5 2 -3.5 -1 0 -1 C3.5 -1 3.5 2 0 4.5 Z" fill="#e5484d"/><path d="M-1.8 -1 L0 -3 L1.8 -1 Z" fill="#4caf6d"/></g></svg>',
   },
   {
     id: 'cherry',
     label: 'Cherry',
-    tile: 20,
-    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="20" height="20" fill="#fdeef0"/><g transform="translate(10 12)"><circle cx="-3" cy="2" r="3.2" fill="#c8273c"/><circle cx="3" cy="3.5" r="3.2" fill="#c8273c"/><path d="M-3 -1 C-2 -6 2 -7 3.5 -8" fill="none" stroke="#4caf6d" stroke-width="1.3"/><path d="M3 0.3 C3 -4 4 -6 3.5 -8" fill="none" stroke="#4caf6d" stroke-width="1.3"/></g></svg>',
+    tile: 21,
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21"><rect width="21" height="21" fill="#fdeef0"/><g transform="translate(10.5 13)"><circle cx="-2" cy="1" r="2.1" fill="#c8273c"/><circle cx="2" cy="2" r="2.1" fill="#c8273c"/><path d="M-2 -1 C-2 -6 0 -7 1 -9" fill="none" stroke="#4caf6d" stroke-width="0.9"/><path d="M2 0 C2.5 -5 1.5 -7 1 -9" fill="none" stroke="#4caf6d" stroke-width="0.9"/></g></svg>',
   },
 ]
 
