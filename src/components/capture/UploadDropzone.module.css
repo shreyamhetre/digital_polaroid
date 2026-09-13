@@ -1,0 +1,21 @@
+.dropzone {
+  width: min(480px, 100%);
+  aspect-ratio: 4 / 3;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: var(--space-4);
+}
+
+.dropzone:hover {
+  border-color: var(--color-accent);
+}
+
+.input {
+  display: none;
+}

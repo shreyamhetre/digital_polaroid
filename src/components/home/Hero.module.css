@@ -1,0 +1,92 @@
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+  gap: var(--space-3);
+}
+
+.camera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--space-3);
+}
+
+.cameraBody {
+  position: relative;
+  width: 220px;
+  height: 140px;
+  background: var(--color-surface);
+  border: 3px solid var(--color-text);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-polaroid);
+}
+
+.lens {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--color-text);
+  border: 6px solid var(--color-accent-soft);
+}
+
+.flash {
+  position: absolute;
+  top: 14px;
+  right: 22px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.cameraFoot {
+  width: 60px;
+  height: 10px;
+  background: var(--color-text);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.heading {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin: 0;
+}
+
+.subheading {
+  color: var(--color-text-muted);
+  max-width: 32rem;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.primary,
+.secondary {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.primary {
+  background: var(--color-accent);
+  color: var(--color-surface);
+}
+
+.secondary {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}

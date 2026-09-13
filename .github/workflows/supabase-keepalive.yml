@@ -1,0 +1,18 @@
+name: Supabase Keepalive
+
+# Free-tier Supabase projects auto-pause after 7 days with no API activity.
+# This pings the reviews table weekly so the project never goes dormant.
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST endpoint
+        run: |
+          curl -sf "${{ vars.VITE_SUPABASE_URL }}/rest/v1/reviews?select=id&limit=1" \
+            -H "apikey: ${{ vars.VITE_SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ vars.VITE_SUPABASE_ANON_KEY }}"
