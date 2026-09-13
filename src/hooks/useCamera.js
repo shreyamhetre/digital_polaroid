@@ -8,31 +8,47 @@ import { useCallback, useRef, useState } from 'react'
 export function useCamera() {
   const videoRef = useRef(null)
   const streamRef = useRef(null)
+  // Bumped by stop() so a start() call that was already in flight (e.g. from
+  // React StrictMode's mount -> cleanup -> mount) can detect it's stale once
+  // its getUserMedia promise resolves, instead of clobbering a newer stream
+  // or surfacing a spurious error.
+  const generationRef = useRef(0)
   const [isActive, setIsActive] = useState(false)
   const [error, setError] = useState(null)
 
   const stop = useCallback(() => {
+    generationRef.current += 1
     streamRef.current?.getTracks().forEach((track) => track.stop())
     streamRef.current = null
     setIsActive(false)
   }, [])
 
   const start = useCallback(async () => {
+    const generation = generationRef.current
     setError(null)
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: 'user' },
         audio: false,
       })
+      if (generation !== generationRef.current) {
+        // stop() ran while we were waiting on permission — discard this stream.
+        stream.getTracks().forEach((track) => track.stop())
+        return
+      }
       streamRef.current = stream
       if (videoRef.current) {
         videoRef.current.srcObject = stream
-        await videoRef.current.play()
+        // A rapid mount/unmount (StrictMode) can interrupt this play() call
+        // with an AbortError that isn't a real camera failure — ignore it.
+        videoRef.current.play().catch(() => {})
       }
       setIsActive(true)
     } catch (err) {
-      setError(err)
-      setIsActive(false)
+      if (generation === generationRef.current) {
+        setError(err)
+        setIsActive(false)
+      }
     }
   }, [])
 
